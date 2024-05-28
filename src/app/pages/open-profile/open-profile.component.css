@@ -50,6 +50,10 @@
     width: 50px;
 }
 
+.card-traq {
+    padding-top: 40px;
+}
+
 .background-profile {
     display: flex;
     justify-content: center;
