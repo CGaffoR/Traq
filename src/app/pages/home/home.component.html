@@ -57,9 +57,9 @@
       <mat-grid-list class="grid-home" cols="2" rowHeight="80vh">
         <mat-grid-tile class="grid-column"></mat-grid-tile>
         <mat-grid-tile class="grid-column">
-          <mat-card class="card-traq">
+          <mat-card >
             <mat-card-content>
-              <mat-card-header>
+              <mat-card-header class="card-traq">
                 <mat-card-title>TRAQ</mat-card-title>
                 <mat-card-subtitle
                   >Transparência Rastreabilidade de Agroprodutos pelo
@@ -74,7 +74,7 @@
                 </p>
                 <qrcode
                   [qrdata]="qrcode"
-                  [width]="512"
+                  [width]="400"
                   [errorCorrectionLevel]="'M'"
                 ></qrcode>
               </mat-card-content>
