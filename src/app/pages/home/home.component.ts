@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
-import { Router } from 'express';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class HomeComponent {
   public isMenu: boolean = true;
 
   constructor() {
-    this.qrcode = 'google.com';
+    this.qrcode = environment.AUTH_API + 'home';
   }
   toggleMenu() {
     this.isMenu = !this.isMenu;

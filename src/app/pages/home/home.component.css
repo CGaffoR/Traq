@@ -56,7 +56,7 @@
   background-color: #fff; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; 
+  transition: 2.5s; 
 }
 
 @media (max-width: 768px) {
@@ -72,6 +72,8 @@
   color: #818181;
   display: block;
   transition: 0.3s;
+  cursor: pointer;
+
 }
 
 .sidebar ul {
