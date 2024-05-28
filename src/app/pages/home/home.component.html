@@ -1,0 +1,87 @@
+<nav class="sidebar" [ngClass]="{ 'block-menu': isMenu }">
+  <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/about">About</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+  </ul>
+</nav>
+<mat-toolbar class="header">
+  <img
+    class="icon-traq"
+    src="/assets/images/frutas-e-vegetais.png"
+    alt="Traq icon"
+  />
+  <span><a class="router-link" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">TRAQ</a></span>
+  <span class="header-spacer"></span>
+  <!-- <span>
+    <a class="router-link" href="" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">F.A.Q.</a>
+  </span> -->
+  <a href="" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <button mat-icon-button class="icon-profile" aria-label="profile traq">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  </a>
+  <button mat-icon-button class="example-icon" aria-label="icon-button with menu icon"  (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div id="home-container">  
+  <section class="section-content">
+    <article class="article-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-header>
+            <mat-card-title>TRAQ</mat-card-title>
+            <mat-card-subtitle
+              >Transparência Rastreabilidade de Agroprodutos pelo
+              QRCode</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content class="home-card-content">
+            <p>
+              TRAQ é uma plataforma que permite a rastreabilidade de produtos
+              agropecuários, desde a origem até o consumidor final, por meio
+              de um QRCode.
+            </p>
+            <qrcode
+              [qrdata]="qrcode"
+              [width]="256"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          </mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </article>
+    <article class="card-grid">
+      <mat-grid-list class="grid-home" cols="2" rowHeight="80vh">
+        <mat-grid-tile class="grid-column"></mat-grid-tile>
+        <mat-grid-tile class="grid-column">
+          <mat-card>
+            <mat-card-content>
+              <mat-card-header>
+                <mat-card-title>TRAQ</mat-card-title>
+                <mat-card-subtitle
+                  >Transparência Rastreabilidade de Agroprodutos pelo
+                  QRCode</mat-card-subtitle
+                >
+              </mat-card-header>
+              <mat-card-content class="home-card-content">
+                <p>
+                  TRAQ é uma plataforma que permite a rastreabilidade de produtos
+                  agropecuários, desde a origem até o consumidor final, por meio
+                  de um QRCode.
+                </p>
+                <qrcode
+                  [qrdata]="qrcode"
+                  [width]="512"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </mat-card-content>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </article>
+  </section>
+</div>

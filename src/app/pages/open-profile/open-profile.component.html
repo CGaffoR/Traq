@@ -1,0 +1,29 @@
+<mat-card color="primary" id="container">
+  <div class="profile-card">
+      <mat-card-header class="header-profile">
+          <div mat-card-avatar class="icone-profile"></div>
+          <mat-card-title>Agnaldo Simplicio</mat-card-title>
+          <mat-card-subtitle>Frutas</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="background-profile">
+          <img mat-card-xl-image src="https://img.freepik.com/fotos-gratis/macas-em-uma-arvore_144627-2095.jpg?w=996&t=st=1716916687~exp=1716917287~hmac=9b472b53e1332befa2a93191a75a94d74b8db4f8988c51039a85089d9ad7d3f9" alt="Photo of a Shiba Inu">
+        </mat-card-content>
+        <mat-card-content class="card-content">
+          <span>Produzidos</span>
+          <span>
+            <img src="../../../assets/images/maca.png" alt="Produtor de macas">
+            <img src="../../../assets/images/laranja.png" alt="Produtor de Laranjas">
+          </span>
+          <p>
+            As macieiras são cultivadas em solos ricos e saudáveis, mantidos através de técnicas de compostagem e adubação orgânica. 
+            A rotação de culturas e a utilização de plantas de cobertura ajudam a preservar a fertilidade do solo e a prevenir a erosão.
+            Para o controle de pragas, a Frutivida Sustentável utiliza métodos naturais, como a introdução de predadores naturais e a aplicação 
+            de extratos de plantas que atuam como repelentes naturais. A irrigação é feita de maneira eficiente com sistemas de gotejamento, garantindo o uso racional da água.
+          </p>
+          <star-rating size="large" [readOnly]="true" [rating]="4.5" ></star-rating>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="openDialog()">AVALIAR</button>
+        </mat-card-actions>
+  </div>
+</mat-card>

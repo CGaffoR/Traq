@@ -1,0 +1,120 @@
+.header {
+  background-color: #f8f9fa;
+  height: 80px;
+  display: flex;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.header span {
+  margin-left: 10px;
+}
+.header-spacer {
+    flex: 1 1 auto;
+  }
+.icon-traq {
+  height: 80%;
+}
+
+#home-container {
+  height: calc(
+    100vh - 80px
+  ); /* Calcula a altura subtraindo a altura do cabeçalho */
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/assets/images/bazar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+}
+
+.block-menu {
+  display: none;
+}
+
+.section-content {
+    width: 100%;
+    padding: 0;
+}
+
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 320px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #fff; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; 
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 160px;
+  }
+  
+}
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  background-color: #FFF;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebar a {
+  color: #575757;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #81BB41;
+  padding-left: 10px;
+  padding: 10px;
+}
+
+.article-card {
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto 0 auto;
+  width: calc(100% - 50px);
+}
+
+@media screen and (max-width: 600px) {
+  .article-card {
+    display: flex;
+  }
+  .card-grid {
+    display: none;
+  }
+}
+

@@ -1,0 +1,52 @@
+<mat-card color="primary" class="container">
+   <a href="/home" class="router-link" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <img
+        class="icon-traq"
+        src="/assets/images/frutas-e-vegetais.png"
+        alt="Traq icon"
+         />
+   </a>
+    <mat-card-content class="card-login bakcground-login">
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-subtitle>Access</mat-card-subtitle>
+        </mat-card-header>
+        <form [formGroup]="login" (ngSubmit)="printForm()">
+            <mat-card-content class="conteudo-login">
+                <mat-form-field appearance="outline" class="form-field-full">
+                    <mat-label id="email" class="text-default">Email</mat-label>
+                    <input matInput placeholder="Ex: Traq@email.com" formControlName="email">
+                    @if (login.controls['email'].invalid) {
+                        <mat-error aria-describedby="account">
+                            {{
+                                getEmailErrorMessage()
+                            }}
+                        </mat-error>
+                    }
+                    <mat-hint align="end">{{login.value.password?.length}}/36</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field-full">
+                    <mat-label id="password" class="text-default">Password</mat-label>
+                    <input matInput placeholder="Ex: 123" class="border-primary" formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]=hide>
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    @if (login.controls['password'].invalid) {
+                        <mat-error>
+                            {{
+                                getPasswordErrorMessage()
+                            }}
+                        </mat-error>
+                    }
+                    <mat-hint align="end">{{login.value.password?.length}}/24</mat-hint>
+                </mat-form-field>
+                <mat-label>
+                    Don't have account <a href="/register">sing-up</a>
+                </mat-label>
+                <button mat-flat-button color="primary" type="submit">
+                    Login
+                </button>
+            </mat-card-content>
+        </form>
+    </mat-card-content>
+</mat-card>

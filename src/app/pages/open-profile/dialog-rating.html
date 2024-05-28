@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Avaliar</h2>
+<mat-dialog-content class="rating-content">
+  <star-rating size="large" [starType]="'svg'" [rating]="0"></star-rating>
+  <mat-form-field>
+    <mat-label>avaliar</mat-label>
+    <input matInput>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">avaliar</button>
+  <button mat-button (click)="onNoClick()">agora nao</button>
+</mat-dialog-actions>
