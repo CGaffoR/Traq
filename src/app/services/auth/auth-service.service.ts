@@ -13,7 +13,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'https://traq-api.onrender.com/api/auth';
   private secretKey =  'YOSOYCARLAO';
   private token: string | null = null;
 
@@ -53,7 +53,7 @@ export class AuthService {
     return null;
   }
   async test() {
-    return await fetch('http://localhost:3000/');
+    return await fetch('https://traq-api.onrender.com/');
   }
 
   getToken() {

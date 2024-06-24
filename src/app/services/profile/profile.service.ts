@@ -24,7 +24,7 @@ export class ProfileService {
       profilePicture: string,
       backgroundPicture: string
     }) {
-    return axios.put('http://localhost:3000/api/profile/', data, {
+    return axios.put('https://traq-api.onrender.com/api/profile/', data, {
       headers: {  
         'Authorization': `Bearer ${this.auth.getToken()}`
       }
@@ -32,7 +32,7 @@ export class ProfileService {
   }
   async getProfileData(userId: string) {
     try {
-      const response = await axios.get(`http://localhost:3000/api/profile/${userId}`);
+      const response = await axios.get(`https://traq-api.onrender.com/api/profile/${userId}`);
       console.log(response);
       return response;
     } catch (error) {
