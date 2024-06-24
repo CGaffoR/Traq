@@ -7,23 +7,29 @@ import { AuthService } from '../../services/auth/auth-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProfileService } from '../../services/profile/profile.service';
 import { ProfileResponse } from '../../types/profile-response.type';
+import { MatDialog, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterOutlet, AngularMaterialModule, CommonModule],
+  imports: [RouterOutlet, AngularMaterialModule, CommonModule, QRCodeModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   profile: FormGroup;
+  qrcode: string;
   profileLoaded: any;
   constructor(
+    public dialog: MatDialog,
     private notificationService: NotificationsService,
     private authService: AuthService,
     private router: Router,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    
   ) {
+    this.qrcode = 'https://traq-api.onrender.com/api/profile/'+this.authService.getUserFromToken().id;
     this.profile = new FormGroup({
       name: new FormControl(''),
       specialization: new FormControl(''),
@@ -57,5 +63,42 @@ export class ProfileComponent {
       this.notificationService.showError('Error updating profile'+error);
       throw new Error("Error sending profile data");
     }
+  }
+  openQRCode(): void {
+    const dialogRef = this.dialog.open(DialogQRCODEComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+}
+@Component({
+  selector: 'dialog-qrcode-dialog',
+  templateUrl: 'dialog-qrcode-dialog.html',
+  styleUrl: './profile.component.css',
+  standalone: true,
+  imports: [
+    AngularMaterialModule,
+    MatDialogTitle,
+    MatDialogContent,
+    QRCodeModule
+  ],
+})
+export class DialogQRCODEComponent {
+  qrcode: string;
+  constructor(
+    public dialogRef: MatDialogRef<DialogQRCODEComponent>,
+    private notificationService: NotificationsService,
+    private authService: AuthService,
+  ) {
+    this.qrcode = 'https://traq-api.onrender.com/api/profile/'+this.authService.getUserFromToken().id;
+  }
+
+  openQRCode(): void {
+    this.dialogRef.close();
+    this.notificationService.showSuccess('Rating submitted');
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
