@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import {
   FormBuilder,
@@ -9,6 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth-service.service';
+import { NotificationsService } from '../../services/notification/notifications.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,27 +23,47 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   
   private formBuilderService: FormBuilder = inject(FormBuilder);
+
   protected hide = true;
+  login: FormGroup;
+
+  constructor(
+    private notificationService: NotificationsService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.login = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+  }
 
   // protected login = this.formBuilderService.group({
   //   email: ['', Validators.required, Validators.email],
   //   password: ['', Validators.required, Validators.minLength(6)]
   // });
 
-  public printForm() {
+  public async onSubmit() {
     if (!this.login.invalid) {
-      console.log(this.login.value);
+      const credentials = {
+        email: this.login.get('email')?.value || '',
+        password: this.login.get('password')?.value || ''
+      };
+      try {
+        await this.authService.login(this.login.value.email, this.login.value.password);
+        this.notificationService.showSuccess('Autenticado com sucesso');
+        setTimeout(() => {
+          this.router.navigate(['/home']); 
+        }, 1000);
+      } catch (error) {
+        this.notificationService.showError('Falha na autenticação');
+        throw error;
+      }
     }
   }
-
-  login = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
-
   getEmailErrorMessage(): string {
     const errors = this.login.controls['email'].errors;
     if (errors) {

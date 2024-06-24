@@ -1,3 +1,6 @@
 .espacamento-toolbar {
     flex: 1 1 auto;
   }
+  .icon-traq {
+    height: 60px;
+  }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../../interfaces/IUser';
-import { Observable, of, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import axios from 'axios';
+import { NotificationsService } from '../notification/notifications.service';
+import { jwtDecode } from 'jwt-decode';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,44 +12,59 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  
+  private apiUrl = 'https://traq-api.onrender.com/api/auth';
+  private secretKey =  'YOSOYCARLAO';
+  private token: string | null = null;
 
-  // constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient, 
+    private notificationService: NotificationsService,
+  ) {}
 
-  // login(user: IUser, router: Router): Observable<any> {
-  //   /*return this.httpClient.post<any>(apiUrlUsuario + "/login", usuario).pipe(
-  //   tap((resposta) => {
-  //     if(!resposta.sucesso) return;
-  //     localStorage.setItem('token', btoa(JSON.stringify(resposta['token'])));
-  //     localStorage.setItem('usuario', btoa(JSON.stringify(resposta['usuario'])));
-  //     this.router.navigate(['']);
-  //   }));*/
-  //   return this.mockUsuarioLogin(user).pipe(tap((resposta) => {
-  //     if(!resposta.sucesso) return;
-  //     localStorage.setItem('token', btoa(JSON.stringify("TokenQueSeriaGeradoPelaAPI")));
-  //     localStorage.setItem('usuario', btoa(JSON.stringify(user)));
-  //     router.navigate(['']);
-  //     console.log("Logado com sucesso!"+localStorage.getItem('token')+" "+localStorage.getItem('usuario'));
-  //   }));
-  // }
-  private mockUsuarioLogin(usuario: IUser): Observable<any> {
-    var retornoMock: any = [];
-    if(usuario.email === "traq@email.com" && usuario.password == "123"){
-      retornoMock.sucesso = true;
-      retornoMock.usuario = usuario;
-      retornoMock.token = "TokenQueSeriaGeradoPelaAPI";
-      return of(retornoMock);
+  async login(email: string, password: string): Promise<string> {
+    try {
+      const response = await axios.post<{ token: string }>(`${this.apiUrl}/login`, { email, password });
+      const token = response.data.token;
+      localStorage.setItem("auth-token", token);
+      return token;
+    } catch (error) {
+      throw error;
     }
-    retornoMock.sucesso = false;
-    retornoMock.usuario = usuario;
-    return of(retornoMock);
+  }
+  async register (name:string, email: string, password: string): Promise<Object> {
+    try {
+      return await axios.post<{ token: string }>(`${this.apiUrl}/register`, { name, email, password });
+    } catch (error) {
+      throw error;
+    }
+  }
+  getUserFromToken(): any | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        return decoded;
+      } catch (error) {
+        console.error('Erro ao decodificar o token JWT:', error);
+        return null;
+      }
+    }
+    return null;
+  }
+  async test() {
+    return await fetch('https://traq-api.onrender.com/');
+  }
+
+  getToken() {
+    return localStorage.getItem("auth-token")
   }
 
   logout() {
-    return false;
+    localStorage.removeItem("auth-token");
   }
 
   isLoggedIn(): boolean {
-    return false;
-    // return localStorage.getItem('token') ? true : false;
+      return localStorage.getItem("auth-token") !== null;
   }
 }

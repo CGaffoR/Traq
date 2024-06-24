@@ -1,8 +1,15 @@
 <p>
   <mat-toolbar color="primary" class="custom-toolbar">
+    <a href="" class="router-link" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <img
+      class="icon-traq"
+      src="/assets/images/frutas-e-vegetais.png"
+      alt="Traq icon"
+      />
+    </a>
     <span>TRAQ</span>
     <span class="espacamento-toolbar"></span>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="loggout()">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
