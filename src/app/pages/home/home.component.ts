@@ -4,6 +4,7 @@ import { AngularMaterialModule } from '../../angular-material/angular-material.m
 import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../services/auth/auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +17,17 @@ export class HomeComponent {
   public qrcode: string;
   public isMenu: boolean = true;
 
-  constructor() {
+  constructor(
+    private auth: AuthService
+  ) {
     this.qrcode = environment.AUTH_API + 'home';
   }
   toggleMenu() {
     this.isMenu = !this.isMenu;
     console.log('Menu is: ', this.isMenu);
   }
+  goToProfile() {
+    window.location.href = '/profile';
+  }
+
 }

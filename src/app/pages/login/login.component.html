@@ -11,7 +11,7 @@
             <mat-card-title>Login</mat-card-title>
             <mat-card-subtitle>Access</mat-card-subtitle>
         </mat-card-header>
-        <form [formGroup]="login" (ngSubmit)="printForm()">
+        <form [formGroup]="login" (ngSubmit)="onSubmit()">
             <mat-card-content class="conteudo-login">
                 <mat-form-field appearance="outline" class="form-field-full">
                     <mat-label id="email" class="text-default">Email</mat-label>

@@ -1,0 +1,45 @@
+<mat-card color="primary" class="container">
+    <!-- <a href="/home" class="router-link" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+         <img
+         class="icon-traq"
+         src="/assets/images/frutas-e-vegetais.png"
+         alt="Traq icon"
+          />
+    </a> -->
+     <mat-card-content class="card-login bakcground-login">
+         <mat-card-header>
+             <mat-card-title>Your Profile</mat-card-title>
+             <mat-card-subtitle>informations</mat-card-subtitle>
+         </mat-card-header>
+         <form [formGroup]="profile" (ngSubmit)="onSubmit()">
+             <mat-card-content class="conteudo-login">
+                 <mat-form-field appearance="outline" class="form-field-full">
+                     <mat-label id="name" class="text-default">Name</mat-label>
+                     <input matInput placeholder="Your name" formControlName="name">
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="form-field-full">
+                    <mat-label id="specialization" class="text-default">Specialization</mat-label>
+                    <input matInput placeholder="Your specialization" formControlName="specialization">
+                </mat-form-field>
+                 <mat-form-field appearance="outline" class="form-field-full">
+                     <mat-label id="description" class="text-default">Description</mat-label>
+                     <input matInput placeholder="Your Description" class="border-primary" formControlName="description" >
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="form-field-full">
+                     <mat-label id="profilePicture" class="text-default">Profile Picture</mat-label>
+                     <input matInput placeholder="Your Photo" class="border-primary" formControlName="profilePicture" >
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="form-field-full">
+                     <mat-label id="backgroundPicture" class="text-default">Bakcground Picture</mat-label>
+                     <input matInput placeholder="Your Bakcground Profile" class="border-primary" formControlName="backgroundPicture" >
+                 </mat-form-field>
+                 <button mat-flat-button color="primary" type="submit">
+                     profile
+                 </button>
+                 <button mat-flat-button color="secondary" type="submit">
+                     QRCode
+                 </button>
+             </mat-card-content>
+         </form>
+     </mat-card-content>
+ </mat-card>

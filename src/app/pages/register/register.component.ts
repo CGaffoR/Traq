@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import {
   AbstractControl,
@@ -11,6 +11,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth-service.service';
+import { NotificationsService } from '../../services/notification/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +26,11 @@ export class RegisterComponent {
 
   protected hide = true;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private notificationService: NotificationsService,
+    private router: Router
+  ) {
     this.register = new FormGroup(
       {
         name: new FormControl('', [Validators.required]),
@@ -44,9 +50,23 @@ export class RegisterComponent {
     );
   }
 
-  public printForm() {
+  public async onSubmit() {
     if (!this.register.invalid) {
-      console.log(this.register.value);
+      const credentials = {
+        name: this.register.get('name')?.value || '',
+        email: this.register.get('email')?.value || '',
+        password: this.register.get('password')?.value || ''
+      };
+      try {
+        await this.authService.register(this.register.value.name, this.register.value.email, this.register.value.password);
+        this.notificationService.showSuccess('Registrado com sucesso');
+        setTimeout(() => { 
+          this.router.navigate(['/login']); 
+        }, 1000);
+      } catch (error) {
+        this.notificationService.showError('Falha no Registro');
+        throw error;
+      }
     }
   }
 
